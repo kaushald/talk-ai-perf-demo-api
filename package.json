@@ -1,0 +1,30 @@
+{
+  "name": "demo-ecommerce-api",
+  "version": "1.0.0",
+  "description": "E-commerce API with deliberate performance issues for conference demo",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "seed": "node scripts/seed-data.js",
+    "reset": "node scripts/reset-db.js",
+    "test": "k6 run tests/k6/basic-load.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "sequelize": "^6.35.2",
+    "redis": "^4.6.12",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "prom-client": "^15.1.0",
+    "bcryptjs": "^2.4.3",
+    "joi": "^17.11.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "@faker-js/faker": "^8.3.1"
+  }
+}
