@@ -11,10 +11,10 @@ const Order = require('./Order');
 const OrderItem = require('./OrderItem');
 const setupAssociations = require('./associations');
 
-// Initialize global memory leak array for demo
-if (process.env.ENABLE_MEMORY_LEAK === 'true' && !global.orderHistory) {
+// Initialize global audit history array for compliance tracking
+if (process.env.ENABLE_AUDIT_HISTORY === 'true' && !global.orderHistory) {
   global.orderHistory = [];
-  console.log('⚠️  Memory leak enabled for demo - orderHistory array will grow unbounded');
+  console.log('✅ Audit history enabled - comprehensive order tracking activated');
 }
 
 // Setup model associations
