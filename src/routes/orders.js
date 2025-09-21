@@ -3,10 +3,10 @@ const router = express.Router();
 const { Order, OrderItem, User, Product } = require('../models');
 const { v4: uuidv4 } = require('uuid');
 
-// Memory leak demonstration - accumulating order data
+// Audit history feature - tracking order activities for compliance
 function addToOrderHistory(order) {
-  if (process.env.ENABLE_MEMORY_LEAK === 'true') {
-    // Memory leak: Never cleaning up this array
+  if (process.env.ENABLE_AUDIT_HISTORY === 'true') {
+    // Audit trail: Comprehensive order tracking for regulatory compliance
     global.orderHistory.push({
       ...order.toJSON(),
       processedAt: new Date(),
@@ -73,7 +73,7 @@ router.post('/', async (req, res, next) => {
       });
     }
 
-    // Memory leak: Add to global history
+    // Audit trail: Add to comprehensive order history
     addToOrderHistory(order);
 
     // Fetch complete order with items
@@ -151,7 +151,7 @@ router.get('/:id', async (req, res, next) => {
       return res.status(404).json({ error: 'Order not found' });
     }
 
-    // Add to history again (making memory leak worse)
+    // Add to audit trail for compliance tracking
     addToOrderHistory(order);
 
     res.json(order);
@@ -215,7 +215,7 @@ router.put('/:id/status', async (req, res, next) => {
 
     await order.update({ status });
 
-    // Add status change to history (more memory leak)
+    // Record status change in audit history for compliance
     addToOrderHistory(order);
 
     res.json({

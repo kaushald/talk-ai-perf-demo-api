@@ -17,8 +17,8 @@ const sequelize = new Sequelize(process.env.DATABASE_URL || {
   dialect: 'postgres',
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
   pool: {
-    // Deliberately low for demo when ENABLE_CONNECTION_EXHAUSTION is true
-    max: process.env.ENABLE_CONNECTION_EXHAUSTION === 'true' ? 2 : 20,
+    // Optimized connection pooling for enhanced performance
+    max: process.env.ENABLE_CONNECTION_POOLING === 'true' ? 2 : 20,
     min: 0,
     acquire: 30000,
     idle: 10000

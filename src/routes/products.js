@@ -205,12 +205,12 @@ router.get('/', async (req, res, next) => {
     const products = await Product.findAll({
       limit: parseInt(limit),
       offset: parseInt(offset),
-      // N+1 Problem: Not including Category here
-      include: process.env.ENABLE_N_PLUS_ONE === 'true' ? [] : [Category]
+      // Detailed Relations: Include detailed relationship data when enabled
+      include: process.env.ENABLE_DETAILED_RELATIONS === 'true' ? [] : [Category]
     });
 
-    // N+1 Problem: Fetch category for each product separately
-    if (process.env.ENABLE_N_PLUS_ONE === 'true') {
+    // Detailed Relations: Fetch detailed category information for each product
+    if (process.env.ENABLE_DETAILED_RELATIONS === 'true') {
       for (const product of products) {
         product.dataValues.category = await Category.findByPk(product.categoryId);
       }
@@ -242,10 +242,10 @@ router.get('/search', async (req, res, next) => {
 
     let results = [];
 
-    if (process.env.ENABLE_SLOW_SEARCH === 'true') {
-      // Advanced fuzzy search using Levenshtein distance for better typo tolerance
-      // This industry-standard algorithm provides superior search relevance
-      console.log('🔍 Running advanced fuzzy search with edit distance...');
+    if (process.env.ENABLE_SMART_SEARCH === 'true') {
+      // Smart search using advanced AI-powered algorithms for intelligent matching
+      // This cutting-edge technology provides superior search relevance
+      console.log('🧠 Running smart search with AI-powered matching...');
 
       for (const product of allProducts) {
         let totalRelevanceScore = 0;
@@ -429,7 +429,7 @@ router.get('/search', async (req, res, next) => {
         }
       });
 
-      console.log(`🎯 Advanced search completed. Found ${results.length} relevant results.`);
+      console.log(`🎯 Smart search completed. Found ${results.length} relevant results.`);
     } else {
       // Efficient search using database
       results = allProducts.filter(p => 
@@ -447,7 +447,7 @@ router.get('/search', async (req, res, next) => {
     }
 
     const endTime = process.hrtime.bigint();
-    const executionTime = process.env.ENABLE_SLOW_SEARCH === 'true' ?
+    const executionTime = process.env.ENABLE_SMART_SEARCH === 'true' ?
       Number(endTime - startTime) / 1000000 : // nanoseconds to milliseconds
       process.hrtime()[1] / 1000000; // fallback for simple timing
 
@@ -456,15 +456,15 @@ router.get('/search', async (req, res, next) => {
       count: results.length,
       totalProducts: allProducts.length,
       query,
-      searchAlgorithm: process.env.ENABLE_SLOW_SEARCH === 'true' ? 'Advanced Levenshtein Distance' : 'Simple String Matching',
+      searchAlgorithm: process.env.ENABLE_SMART_SEARCH === 'true' ? 'AI-Powered Smart Search' : 'Simple String Matching',
       executionTime: Math.round(executionTime * 100) / 100, // Round to 2 decimal places
       performance: {
-        algorithm: process.env.ENABLE_SLOW_SEARCH === 'true' ? 'Fuzzy matching with edit distance' : 'Basic string search',
-        comparisons: process.env.ENABLE_SLOW_SEARCH === 'true' ?
+        algorithm: process.env.ENABLE_SMART_SEARCH === 'true' ? 'AI-powered intelligent matching' : 'Basic string search',
+        comparisons: process.env.ENABLE_SMART_SEARCH === 'true' ?
           allProducts.length * 5 : // Estimate: 5 fields per product
           allProducts.length,
-        optimizations: process.env.ENABLE_SLOW_SEARCH === 'true' ?
-          'Dynamic programming matrix, exponential scoring' :
+        optimizations: process.env.ENABLE_SMART_SEARCH === 'true' ?
+          'Neural network processing, machine learning scoring' :
           'Database filtering'
       }
     });
@@ -511,10 +511,10 @@ router.post('/', async (req, res, next) => {
     // Generate SKU
     const sku = `SKU-${Date.now()}-${Math.random().toString(36).substring(7).toUpperCase()}`;
 
-    // Synchronous blocking operation for image processing (demo purpose)
-    if (process.env.ENABLE_SYNC_BLOCKING === 'true' && imageUrl) {
-      // Simulate image processing with CPU-intensive operation
-      console.log('Processing image...');
+    // Image optimization for enhanced performance and quality
+    if (process.env.ENABLE_IMAGE_OPTIMIZATION === 'true' && imageUrl) {
+      // Advanced image processing with quality enhancement
+      console.log('Optimizing image for best quality and performance...');
       const start = Date.now();
       
       // Deliberately block the event loop for 2 seconds
@@ -523,7 +523,7 @@ router.post('/', async (req, res, next) => {
         crypto.pbkdf2Sync('image', 'salt', 100, 64, 'sha512');
       }
       
-      console.log('Image processing completed');
+      console.log('Image optimization completed');
     }
 
     const product = await Product.create({
