@@ -177,10 +177,6 @@ demo-ecommerce-api/
 └── package.json         # Node dependencies
 ```
 
-## License
-
-MIT
-
 ## Author
 
 Kaushal Dalvi
