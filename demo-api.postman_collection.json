@@ -216,6 +216,60 @@
 			]
 		},
 		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "List All Categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    if (response.categories && response.categories.length > 0) {",
+									"        // Set first category as default",
+									"        pm.environment.set('categoryId', response.categories[0].id);",
+									"        ",
+									"        // Log all categories for reference",
+									"        console.log('Available Categories:');",
+									"        response.categories.forEach(cat => {",
+									"            console.log(`  ${cat.name}: ${cat.id}`);",
+									"        });",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/{{categoryId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "categories", "{{categoryId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Products",
 			"item": [
 				{
@@ -693,7 +747,7 @@
 					"",
 					"// Set default categoryId if not set (you may need to update this)",
 					"if (!pm.environment.get('categoryId')) {",
-					"    pm.environment.set('categoryId', '1'); // Default to first category",
+					"    pm.environment.set('categoryId', '06f7bc0a-8163-4d51-9e68-6d8a6b3952b2'); // Electronics category UUID",
 					"}"
 				]
 			}
@@ -737,8 +791,9 @@
 		},
 		{
 			"key": "categoryId",
-			"value": "1",
-			"type": "string"
+			"value": "06f7bc0a-8163-4d51-9e68-6d8a6b3952b2",
+			"type": "string",
+			"description": "Electronics category UUID"
 		}
 	]
 }

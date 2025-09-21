@@ -14,7 +14,7 @@ const requestLogger = require('./middleware/requestLogger');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
-const metricsRoutes = require('./routes/metrics');
+const categoryRoutes = require('./routes/categories');
 
 // Initialize Express app
 const app = express();
@@ -50,6 +50,7 @@ app.use(requestLogger(logger));
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // Add redirect for /api/search to /api/products/search
 app.get('/api/search', (req, res) => {
@@ -93,6 +94,7 @@ app.get('/', (req, res) => {
       users: '/api/users',
       products: '/api/products',
       orders: '/api/orders',
+      categories: '/api/categories',
       health: '/health',
       metrics: '/metrics'
     },
