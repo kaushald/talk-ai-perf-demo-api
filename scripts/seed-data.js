@@ -6,9 +6,13 @@ async function seedDatabase() {
   try {
     console.log('Starting database seed...');
 
-    // Sync database
+    // Test database connection first
+    await sequelize.authenticate();
+    console.log('Database connection verified');
+
+    // Force sync will drop and recreate all tables
     await sequelize.sync({ force: true });
-    console.log('Database synced');
+    console.log('Database synced with fresh tables');
 
     // Create categories
     const categories = [];
@@ -50,11 +54,28 @@ async function seedDatabase() {
     });
     users.push(testUser);
 
-    // Create random users
+    // Create random users with guaranteed unique usernames and emails
+    const usedUsernames = new Set(['testuser']);
+    const usedEmails = new Set(['test@example.com']);
+
     for (let i = 0; i < 999; i++) {
+      let username, email;
+
+      // Ensure unique username
+      do {
+        username = faker.internet.userName() + '_' + i;
+      } while (usedUsernames.has(username));
+      usedUsernames.add(username);
+
+      // Ensure unique email
+      do {
+        email = faker.internet.email();
+      } while (usedEmails.has(email));
+      usedEmails.add(email);
+
       const user = await User.create({
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
+        username,
+        email,
         password: hashedPassword,
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
@@ -71,7 +92,7 @@ async function seedDatabase() {
     }
     console.log(`Created ${users.length} users`);
 
-    // Create products
+    // Create products with unique SKUs
     const products = [];
     for (let i = 0; i < 500; i++) {
       const category = categories[Math.floor(Math.random() * categories.length)];
@@ -80,7 +101,7 @@ async function seedDatabase() {
         description: faker.commerce.productDescription(),
         price: faker.commerce.price({ min: 10, max: 1000, dec: 2 }),
         stock: faker.number.int({ min: 0, max: 100 }),
-        sku: `SKU-${faker.string.alphanumeric(8).toUpperCase()}`,
+        sku: `SKU-${i.toString().padStart(4, '0')}-${faker.string.alphanumeric(4).toUpperCase()}`,
         imageUrl: faker.image.url(),
         categoryId: category.id,
         specifications: {

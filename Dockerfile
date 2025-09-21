@@ -18,8 +18,6 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 # Expose port
 EXPOSE 3000
 
-# Use entrypoint script
+# Use entrypoint script for database wait, then start app
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-
-# Default command
 CMD ["npm", "start"]
