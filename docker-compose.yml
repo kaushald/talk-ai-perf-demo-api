@@ -48,12 +48,12 @@ services:
       REDIS_URL: redis://redis:6379
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      # Performance issue flags
-      ENABLE_N_PLUS_ONE: "true"
-      ENABLE_MEMORY_LEAK: "true"
-      ENABLE_SLOW_SEARCH: "true"
-      ENABLE_SYNC_BLOCKING: "true"
-      ENABLE_CONNECTION_EXHAUSTION: "true"
+      # Feature flags
+      ENABLE_DETAILED_RELATIONS: "true"
+      ENABLE_AUDIT_HISTORY: "true"
+      ENABLE_SMART_SEARCH: "true"
+      ENABLE_IMAGE_OPTIMIZATION: "true"
+      ENABLE_CONNECTION_POOLING: "true"
       ENABLE_MISSING_INDEXES: "false"
     depends_on:
       postgres:

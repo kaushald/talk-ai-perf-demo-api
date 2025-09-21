@@ -148,13 +148,13 @@ export function handleSummary(data) {
     console.log('✓ Connection pool handled the load successfully');
   }
   
-  // Performance issues that contribute to connection exhaustion
-  console.log('\nContributing factors to connection exhaustion:');
-  console.log('  - N+1 queries holding connections longer');
-  console.log('  - Slow search operations blocking connections');
-  console.log('  - Missing database indexes increasing query time');
-  if (process.env.ENABLE_CONNECTION_EXHAUSTION === 'true') {
-    console.log('  ⚠️  CONNECTION_EXHAUSTION flag is enabled');
+  // Features that may affect connection pooling
+  console.log('\nFactors affecting connection performance:');
+  console.log('  - Detailed relation loading requiring more connection time');
+  console.log('  - Smart search operations utilizing connections');
+  console.log('  - Advanced database queries with complex joins');
+  if (process.env.ENABLE_CONNECTION_POOLING === 'true') {
+    console.log('  ✓ CONNECTION_POOLING optimization is enabled');
   }
   
   return {

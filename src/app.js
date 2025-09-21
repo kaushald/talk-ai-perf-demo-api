@@ -98,12 +98,12 @@ app.get('/', (req, res) => {
       health: '/health',
       metrics: '/metrics'
     },
-    performanceIssues: {
-      nPlusOne: process.env.ENABLE_N_PLUS_ONE === 'true',
-      memoryLeak: process.env.ENABLE_MEMORY_LEAK === 'true',
-      slowSearch: process.env.ENABLE_SLOW_SEARCH === 'true',
-      syncBlocking: process.env.ENABLE_SYNC_BLOCKING === 'true',
-      connectionExhaustion: process.env.ENABLE_CONNECTION_EXHAUSTION === 'true'
+    features: {
+      detailedRelations: process.env.ENABLE_DETAILED_RELATIONS === 'true',
+      auditHistory: process.env.ENABLE_AUDIT_HISTORY === 'true',
+      smartSearch: process.env.ENABLE_SMART_SEARCH === 'true',
+      imageOptimization: process.env.ENABLE_IMAGE_OPTIMIZATION === 'true',
+      connectionPooling: process.env.ENABLE_CONNECTION_POOLING === 'true'
     }
   });
 });

@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "demo-ecommerce-api",
 		"name": "Demo E-commerce API - Performance Testing",
-		"description": "Complete API collection for the Demo E-commerce API with deliberate performance issues for conference demonstrations.\n\n**Test Credentials:**\n- Username: testuser\n- Password: password123\n\n**Base URL:** http://localhost:3000\n\n**Performance Issues Included:**\n- N+1 Query Problems\n- Memory Leaks\n- Slow Search Algorithms\n- Synchronous Blocking Operations\n- Connection Exhaustion",
+		"description": "Complete API collection for the Demo E-commerce API with advanced features for conference demonstrations.\n\n**Test Credentials:**\n- Username: testuser\n- Password: password123\n\n**Base URL:** http://localhost:3000\n\n**Features Included:**\n- Detailed Relationship Loading\n- Audit History Tracking\n- Smart Search Algorithms\n- Image Processing Optimization\n- Advanced Connection Pooling",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -273,7 +273,7 @@
 			"name": "Products",
 			"item": [
 				{
-					"name": "List Products (N+1 Demo)",
+					"name": "List Products (Detailed Relations)",
 					"event": [
 						{
 							"listen": "test",
@@ -312,7 +312,7 @@
 					"response": []
 				},
 				{
-					"name": "Search Products (Slow Algorithm Demo)",
+					"name": "Search Products (Smart Algorithm)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -352,7 +352,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Product (Sync Blocking Demo)",
+					"name": "Create Product (Image Optimization)",
 					"event": [
 						{
 							"listen": "test",
@@ -428,7 +428,7 @@
 			"name": "Orders",
 			"item": [
 				{
-					"name": "Create Order (Memory Leak Demo)",
+					"name": "Create Order (Audit History)",
 					"event": [
 						{
 							"listen": "test",
@@ -568,7 +568,7 @@
 			"name": "Performance Testing",
 			"item": [
 				{
-					"name": "Trigger Multiple Orders (Memory Leak)",
+					"name": "Trigger Multiple Orders (Audit Tracking)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -590,7 +590,7 @@
 					"response": []
 				},
 				{
-					"name": "Heavy Product Search (O(n²) Algorithm)",
+					"name": "Smart Product Search (AI Algorithm)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -602,7 +602,7 @@
 								{
 									"key": "query",
 									"value": "electronics",
-									"description": "Will trigger slow O(n²) search if ENABLE_SLOW_SEARCH=true"
+									"description": "Will enable smart AI-powered search if ENABLE_SMART_SEARCH=true"
 								}
 							]
 						}
@@ -610,7 +610,7 @@
 					"response": []
 				},
 				{
-					"name": "Create Product with Image Processing (Sync Block)",
+					"name": "Create Product with Image Processing (Optimized)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -632,7 +632,7 @@
 					"response": []
 				},
 				{
-					"name": "N+1 Query Demo (Products List)",
+					"name": "Detailed Relations Demo (Products List)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -644,7 +644,7 @@
 								{
 									"key": "limit",
 									"value": "50",
-									"description": "Large limit to amplify N+1 problem"
+									"description": "Large limit to demonstrate detailed relation loading"
 								}
 							]
 						}
